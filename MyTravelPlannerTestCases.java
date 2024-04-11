@@ -135,18 +135,21 @@ public class MyTravelPlannerTestCases {
         assertEquals("Please drive on 2024-04-14, and leave the house at your convenience.", result);
     }
 
+   
     @Test
-    public void testCloudyWeekendWithinTrainHours() {
+    public void testSunnyWeekdayDuringTrainHours() {
         MyTravelPlanner planner = new MyTravelPlanner();
-        String result = planner.getPlan(LocalDate.of(2024, 4, 15), "Cloudy", LocalTime.of(12, 0), LocalTime.of(18, 0));
-        assertEquals("Please take the 10:00 train to go to the city, and 22:00 train to get back home on 2024-04-15.", result);
+        String result = planner.getPlan(LocalDate.of(2024, 4, 11), "Sunny", LocalTime.of(7, 0), LocalTime.of(21, 0));
+        assertEquals("Please take the 06:00 train to go to the city, and 23:00 train to get back home on 2024-04-11.", result);
     }
 
     @Test
-    public void testCloudyWeekendOutsideTrainHours() {
+    public void testCloudyWeekendDuringTrainHours() {
         MyTravelPlanner planner = new MyTravelPlanner();
-        String result = planner.getPlan(LocalDate.of(2024, 4, 15), "Cloudy", LocalTime.of(8, 0), LocalTime.of(20, 0));
-        assertEquals("Please drive on 2024-04-15, and leave the house at your convenience.", result);
+        String result = planner.getPlan(LocalDate.of(2024, 4, 14), "Cloudy", LocalTime.of(12, 30), LocalTime.of(18, 30));
+        assertEquals("Please take the 10:00 train to go to the city, and 22:00 train to get back home on 2024-04-14.", result);
     }
 
 }
+
+

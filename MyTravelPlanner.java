@@ -6,8 +6,26 @@ import java.time.LocalTime;
 public class MyTravelPlanner {
 
     public String getPlan(LocalDate date, String weather, LocalTime firstAppointment, LocalTime lastAppointment) {
-
-        return "Invalid plan"; 
+        if (weather.equalsIgnoreCase("Rainy") || weather.equalsIgnoreCase("Snowy")) {
+            return "Please cancel or reschedule your appointments on " + date.toString() + ".";
+        }
+        
+        LocalTime firstTrain;
+        LocalTime lastTrain;
+        if (date.getDayOfWeek().getValue() >= 1 && date.getDayOfWeek().getValue() <= 5) {
+            firstTrain = LocalTime.of(6, 0);
+            lastTrain = LocalTime.of(23, 0);
+        } else { 
+            firstTrain = LocalTime.of(10, 0);
+            lastTrain = LocalTime.of(22, 0);
+        }
+        
+        if (firstAppointment.isAfter(firstTrain) && lastAppointment.isBefore(lastTrain)) {
+            return "Please take the " + firstTrain.toString() + " train to go to the city, and " +
+                    lastTrain.toString() + " train to get back home on " + date.toString() + ".";
+        } else {
+            return "Please drive on " + date.toString() + ", and leave the house at your convenience.";
+        }
     }
 
     public static void main(String[] args) {
